@@ -1,13 +1,11 @@
 import java.util.Arrays;
-import java.util.Scanner;
-public class HumanPlayer extends Player{
+import java.util.Scanner; // lee datos introducidos por el usuario desde la entrada standard como el teclado
+public class HumanPlayer extends Player{ // extends establece la herencia entre clases, esto quiere decir que puede heredar atributos y métodos de otra clase
     @Override
     public int makeGuess() { // Método que cada clase que hereda de Player debe implementar.
         Scanner teclado = new Scanner(System.in);
         System.out.print(this.getName() + ", escribe el número que crees: ");
         int player1Number = teclado.nextInt();
-        // Crea un nuevo array con un tamaño aumentado en uno
-        this.guesses = new int[0];
         int[] newGuesses = new int[this.guesses.length + 1];
         // Copia los elementos existentes al nuevo array
         System.arraycopy(this.guesses, 0, newGuesses, 0, guesses.length);
