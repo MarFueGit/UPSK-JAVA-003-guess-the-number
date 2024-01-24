@@ -16,7 +16,7 @@ public class ComputerPlayer extends Player{
         // Coloca el nuevo número al final del nuevo array
         newGuesses[this.guesses.length] = player2Number;
         // Actualiza la referencia del array de suposiciones
-        guesses = newGuesses;
+        this.guesses = newGuesses;
         return player2Number;
     }
 }
