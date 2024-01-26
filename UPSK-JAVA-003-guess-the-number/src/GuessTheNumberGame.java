@@ -7,6 +7,36 @@ public class GuessTheNumberGame {   // clase principal que contiene toda la lóg
     public static void main(String[] args) {
         // Iniciamos el juego creando un objeto de tipo GuessTheNumberGame
         GuessTheNumberGame game = new GuessTheNumberGame();
+        game.startGame(game);
+    }
+
+    public boolean checkGuess(Player player){
+        // Obtenemos las suposiciones del jugador
+        int[] guessesPlayer1 = player.getGuesses();
+        //convierte el array en un flujo (stream) de enteros, y anyMatch(x -> x == numero)
+        // verifica si algún elemento del stream es igual al número buscado.
+        return Arrays.stream(guessesPlayer1).anyMatch(x -> x == this.targetNumber);
+    }
+
+    public String checkNearOrFar(int base, int number){
+        double diferencia = Math.abs(base - number);
+
+        // Compara la diferencia con el umbral de cercanía
+        if(diferencia <= 5){
+            return "El número " + number + ", cerca ...";
+        }else{
+            return "El número " + number + ", lejos ...";
+        }
+    }
+
+    // Mostrar las supocisiones
+    public void showGuesses(int[] guesses){
+        for (int i = 0; i < guesses.length; i++) {
+            System.out.print(" " + guesses[i]);
+        }
+    }
+
+    public void startGame(GuessTheNumberGame game){
         // Generamos el número a adivinar de forma aleatoria
         game.random = new Random();
         game.targetNumber = game.random.nextInt(100);
@@ -28,7 +58,7 @@ public class GuessTheNumberGame {   // clase principal que contiene toda la lóg
                 System.out.println(player1.getName() + "¡ganaste! el número fue: " + game.targetNumber + " . En el turno: " + (i + 1) + " . Historial de suposiciones: " + Arrays.toString(player1.getGuesses()));
                 System.exit(1);
             }else{
-                game.checkNearOrFar(game.targetNumber, guessNumberPlayer1);
+                System.out.println(game.checkNearOrFar(game.targetNumber, guessNumberPlayer1));
             }
             //Le preguntamos el número a la computadora
             int guessNumberComputer = player2.makeGuess();
@@ -45,31 +75,5 @@ public class GuessTheNumberGame {   // clase principal que contiene toda la lóg
         System.out.println("Nadie gano en " + intentos + " intentos. El numero era: " + game.targetNumber);
         // Terminamos el programa
         System.exit(0);
-    }
-
-    public boolean checkGuess(Player player){
-        // Obtenemos las suposiciones del jugador
-        int[] guessesPlayer1 = player.getGuesses();
-        //convierte el array en un flujo (stream) de enteros, y anyMatch(x -> x == numero)
-        // verifica si algún elemento del stream es igual al número buscado.
-        return Arrays.stream(guessesPlayer1).anyMatch(x -> x == this.targetNumber);
-    }
-
-    public void checkNearOrFar(int base, int number){
-        double diferencia = Math.abs(base - number);
-
-        // Compara la diferencia con el umbral de cercanía
-        if(diferencia <= 5){
-            System.out.println("El número " + number + ", cerca ...");
-        }else{
-            System.out.println("El número " + number + ", lejos ...");
-        }
-    }
-
-    // Mostrar las supocisiones
-    public void showGuesses(int[] guesses){
-        for (int i = 0; i < guesses.length; i++) {
-            System.out.print(" " + guesses[i]);
-        }
     }
 }
