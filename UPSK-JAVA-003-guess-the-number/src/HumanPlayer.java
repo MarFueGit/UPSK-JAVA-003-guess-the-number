@@ -4,7 +4,7 @@ public class HumanPlayer extends Player{ // extends establece la herencia entre 
     @Override
     public int makeGuess() { // Método que cada clase que hereda de Player debe implementar.
         Scanner teclado = new Scanner(System.in);
-        System.out.print(this.getName() + ", escribe el número que crees: ");
+        System.out.print("Escribe el número que crees: ");
         int player1Number = teclado.nextInt();
         int[] newGuesses = new int[this.guesses.length + 1];
         // Copia los elementos existentes al nuevo array

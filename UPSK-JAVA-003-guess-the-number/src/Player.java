@@ -12,17 +12,13 @@ public abstract class Player{
         return this.guesses;
     }
 
-    public void setName(){
-        // Creamos un objeto llamado teclado de tipo scanner para ingresar datos desde el teclado
-        Scanner teclado = new Scanner(System.in);
-        // Le preguntamos al player1 su nombre
-        System.out.print("Hola, escribe tu nombre: ");
-        // Creamos otra variable para guardar lo que el jugador ingresa desde el teclado
-        this.name = teclado.nextLine();
+    public void setName(String name){
+        this.name = name;
     }
 
     public Player(){
         // Crea un nuevo array con un tamaño aumentado en uno
         this.guesses = new int[0];
+        this.name = "Player 1";
     }
 }

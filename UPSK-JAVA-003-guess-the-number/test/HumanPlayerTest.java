@@ -18,7 +18,7 @@ public class HumanPlayerTest {
         System.setIn(new ByteArrayInputStream("Mary\n".getBytes()));
 
         //Invocamos setName - Act
-        this.player.setName();
+        this.player.setName("Mary");
 
         //Verificamos que si haya seteado el name - Assert
         Assert.assertEquals("Mary", this.player.getName());
