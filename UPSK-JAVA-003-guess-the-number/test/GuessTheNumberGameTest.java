@@ -1,21 +1,17 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.ByteArrayInputStream;  //se utiliza para simular la entrada del teclado durante las pruebas.
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;  // son clases de JUnit Jupiter que se utilizan para realizar afirmaciones en las pruebas.
 import static org.mockito.Mockito.when;
 
 public class GuessTheNumberGameTest {
-
     private GuessTheNumberGame game;
     private HumanPlayer player1;
     private  ComputerPlayer player2;
 
+    // Método de configuración que se realiza antes de la prueba
     @Before
     public void setUpTest(){
         this.game = new GuessTheNumberGame();
@@ -67,7 +63,7 @@ public class GuessTheNumberGameTest {
         this.game.startGame(humanPlayer, computerPlayer, 50);
         assertTrue(this.game.checkGuess(humanPlayer));
     }
-
+// Test donde la computadora ganó
     @Test
     public void testPlayer2Win(){
         GuessTheNumberGame game = Mockito.spy(new GuessTheNumberGame());

@@ -1,21 +1,23 @@
 import org.junit.Before;
 import org.junit.Assert;
 import org.junit.Test;
-import java.io.ByteArrayInputStream;
+import java.io.ByteArrayInputStream; //se utiliza para simular la entrada del teclado durante las pruebas.
 
 public class HumanPlayerTest {
     // Creamos un objeto de tipo Player para testear
     private Player player;
 
-    @Before
+
+    @Before    // Método de configuración que se ejecuta antes de la prueba
     public void setUpTest(){
         this.player = new HumanPlayer();
     }
 
+    // Método de prueba "testSetName"
     @Test
     public void testSetName(){
         //Mockeamos la entrada del teclado - Prepare
-        System.setIn(new ByteArrayInputStream("Mary\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("Mary\n".getBytes()));  //Aquí se simula la entrada del teclado
 
         //Invocamos setName - Act
         this.player.setName("Mary");
@@ -24,6 +26,7 @@ public class HumanPlayerTest {
         Assert.assertEquals("Mary", this.player.getName());
     }
 
+    // Método de prueba "testMakeGuess"
     @Test
     public void testMakeGuess(){
         // Mockear la entrada del teclado - Prepare

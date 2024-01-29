@@ -1,11 +1,13 @@
 import java.util.Random; // Random: clase que Genera números aleatorios
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.Arrays;  // Manipula arreglos
+import java.util.Scanner;  // Entrada de datos desde el teclado
 
 public class GuessTheNumberGame {   // clase principal que contiene toda la lógica del juego.
     // Atributos de la clase.
-    Random random;
-    int targetNumber; //Numero generado por el programa a intentar a adivinar.
+    Random random; // genera los números aleatorios
+    int targetNumber; // almacena el número generado por el programa a intentar a adivinar.
+
+    // Método main inicia el juego
     public static void main(String [ ] args) {
         // Iniciamos el juego creando un objeto de tipo GuessTheNumberGame
         GuessTheNumberGame game = new GuessTheNumberGame();
@@ -26,6 +28,7 @@ public class GuessTheNumberGame {   // clase principal que contiene toda la lóg
         game.startGame(player1, player2, targetNumber);
     }
 
+    //Métodos del juego checkGuess verifica si el jugador ha adivinado el número objetivo
     public boolean checkGuess(Player player){
         // Obtenemos las suposiciones del jugador
         int[] guessesPlayer1 = player.getGuesses();
@@ -34,6 +37,8 @@ public class GuessTheNumberGame {   // clase principal que contiene toda la lóg
         return Arrays.stream(guessesPlayer1).anyMatch(x -> x == this.targetNumber);
     }
 
+
+    //Métodos del juego checkNearOrFar compara un número con el número objetivo y devuelve un mensaje indicando si está cerca o lejos del objetivo.
     public String checkNearOrFar(int base, int number){
         double diferencia = Math.abs(base - number);
 
@@ -45,6 +50,8 @@ public class GuessTheNumberGame {   // clase principal que contiene toda la lóg
         }
     }
 
+// En este método está toda la lógica del juego StartGame
+    // permitiendo que los jugadores hagan sus suposiciones y verificando si han adivinado el número objetivo.
     public void startGame(HumanPlayer player1, ComputerPlayer player2, int targetNumber){
         this.targetNumber = targetNumber;
         // 4. Definimos la cantidad de intentos: 10 y bucle del juego
@@ -57,7 +64,7 @@ public class GuessTheNumberGame {   // clase principal que contiene toda la lóg
             //  Vemos si el número que ingreso el player 1 adivino el que generamos
             boolean adivino = this.checkGuess(player1);
             if(adivino){
-                System.out.println(player1.getName() + "¡ganaste! el número fue: " + this.targetNumber + " . En el turno: " + (intentos + 1) + " . Historial de suposiciones: " + Arrays.toString(player1.getGuesses()));
+                System.out.println(player1.getName() + "¡ganaste! el número fue: " + this.targetNumber + " . En el turno: " + (intentos) + " . Historial de suposiciones: " + Arrays.toString(player1.getGuesses()));
                 someoneWin = true;
             }else{
                 System.out.println(this.checkNearOrFar(this.targetNumber, guessNumberPlayer1));
@@ -68,7 +75,7 @@ public class GuessTheNumberGame {   // clase principal que contiene toda la lóg
             //  Vemos si el número que ingreso el player 1 adivino el que generamos
             boolean adivinoComputer = this.checkGuess(player2);
             if(adivinoComputer){
-                System.out.println("La computadora ha ganado, el número fue: : " + this.targetNumber + " . En el turno: " + (intentos + 1) +" . Historial de suposiciones: " + Arrays.toString(player1.getGuesses()));
+                System.out.println("La computadora ha ganado, el número fue: : " + this.targetNumber + " . En el turno: " + (intentos) +" . Historial de suposiciones: " + Arrays.toString(player1.getGuesses()));
                 someoneWin = true;
             }else{
                 System.out.println(this.checkNearOrFar(this.targetNumber, guessNumberComputer));

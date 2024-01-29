@@ -1,19 +1,23 @@
 import org.junit.Before;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
-import static org.mockito.Mockito.when;
+import org.mockito.Mockito;  //es una clase de Mockito que se utiliza para crear objetos simulados (mocks) y configurar su comportamiento.
+import static org.mockito.Mockito.when;  //se utiliza para configurar el comportamiento de los mocks.
 
+
+// Declaramos la clase prueba a testear ComputerPlayerTest.
 public class ComputerPlayerTest {
 
     //Declaramos nuestro objeto a usar en el test
     private Player player;
 
+    // Aquí va nuestro método de configuración antes de cada prueba
     @Before
     public void setUpTest(){
         this.player = new ComputerPlayer();
     }
 
+    // Método de prueba "testMakeGuess"
     @Test
     public void testMakeGuess(){
 
