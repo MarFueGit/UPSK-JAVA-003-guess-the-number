@@ -2,29 +2,40 @@ import java.util.Random; // Random: clase que Genera números aleatorios
 import java.util.Arrays;  // Manipula arreglos
 import java.util.Scanner;  // Entrada de datos desde el teclado
 
-public class GuessTheNumberGame {   // clase principal que contiene toda la lógica del juego.
+
+// clase principal que contiene toda la lógica del juego.
+public class GuessTheNumberGame {
     // Atributos de la clase.
     Random random; // genera los números aleatorios
     int targetNumber; // almacena el número generado por el programa a intentar a adivinar.
 
     // Método main inicia el juego
     public static void main(String [ ] args) {
-        // Iniciamos el juego creando un objeto de tipo GuessTheNumberGame
+        // 1. Creamos un objeto llamado game de tipo GuessTheNumberGame
         GuessTheNumberGame game = new GuessTheNumberGame();
+        // Creamos un objeto de tipo Random y lo asignamos al atributo random que tiene game
         game.random = new Random();
+        //Usamos el objeto random que acabamos de crear para generar un numero entero aleatorio
+        //Este numero aleatorio será el que se adivinara el en juego y lo guardamos en una variable
+        //Entre 1 y 100 con el método nextIn()
         int targetNumber  = game.random.nextInt(100);
-        // 1. Creamos el objeto de tipo HumanPlayer que será el jugador 1
+        // 2. Creamos el objeto player1 de tipo HumanPlayer
         HumanPlayer player1 = new HumanPlayer();
-        // 3. El usuario ingresa el nombre del jugador desde el teclado
-        // Creamos un objeto llamado teclado de tipo scanner para ingresar datos desde el teclado
+        // 3. Creamos un objeto llamado teclado de tipo scanner para ingresar datos desde el teclado
         Scanner teclado = new Scanner(System.in);
-        // Le preguntamos al player1 su nombre
+        // Ponemos un en consola un texto para preguntar el nombre del jugador
         System.out.print("Hola, escribe tu nombre: ");
-        // Creamos otra variable para guardar lo que el jugador ingresa desde el teclado
+        // Creamos otra variable llamada name para guardar lo que el jugador ingresa desde el teclado
+        // Como ingresara un String, usamos nextLine(), si fuera un entero usariamos nexInt()
         String name = teclado.nextLine();
+        // Con el valor que guardamos del teclado en la variable name, invoco al metodo setName
+        // Y le paso la variable, este metodo seteara el nombre de la jugadora
         player1.setName(name);
-        // 2. Creamos el jugador 2, que será la computadora
+        // 4. Creamos el objeto llamado player2 de tipo ComputerPlayer que será la computadora
         ComputerPlayer player2 = new ComputerPlayer();
+        //5. Invocamos al juego o iniciamos el juego, con el metodo startGame
+        //Le pasamos el jugador1, el jugador2 y el número a adivinar, el cual generamos
+        //de forma aleatoria con Random
         game.startGame(player1, player2, targetNumber);
     }
 
