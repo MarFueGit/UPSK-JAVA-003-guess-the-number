@@ -15,10 +15,10 @@ public class GuessTheNumberGame {
         GuessTheNumberGame game = new GuessTheNumberGame();
         // Creamos un objeto de tipo Random y lo asignamos al atributo random que tiene game
         game.random = new Random();
-        //Usamos el objeto random que acabamos de crear para generar un numero entero aleatorio
-        //Este numero aleatorio será el que se adivinara el en juego y lo guardamos en una variable
+        //Usamos el objeto random que acabamos de crear para generar un número entero aleatorio
+        //Este número aleatorio será el que se adivinara él en juego y lo guardamos en una variable
         //Entre 1 y 100 con el método nextIn()
-        int targetNumber  = game.random.nextInt(50);
+        int targetNumber  = game.random.nextInt(100 - 1 + 1) + 1;
         // 2. Creamos el objeto player1 de tipo HumanPlayer
         HumanPlayer player1 = new HumanPlayer();
         // 3. Creamos un objeto llamado teclado de tipo scanner para ingresar datos desde el teclado
@@ -76,20 +76,26 @@ public class GuessTheNumberGame {
             boolean adivino = this.checkGuess(player1);
             if(adivino){
                 System.out.println(player1.getName() + "¡ganaste! el número fue: " + this.targetNumber + " . En el turno: " + (intentos) + " . Historial de suposiciones: " + Arrays.toString(player1.getGuesses()));
-                someoneWin = true;
+                break;
             }else{
                 System.out.println(this.checkNearOrFar(this.targetNumber, guessNumberPlayer1));
             }
 
-            //antes de que la computadora genere el numero, haremos que sea capaz de leer lo que el jugador1 eligio
-            // Asi sabremos si esta lejos o cerca y sobre eso la computadora generara el nuevo numero
+            //antes de que la computadora genere el número, haremos que sea capaz de leer lo que el jugador1 eligio
+            // Asi sabremos si está lejos o cerca y sobre eso la computadora generará el nuevo número
             String cercaOLejos = this.checkNearOrFar(this.targetNumber, guessNumberPlayer1);
             if(cercaOLejos.contains("cerca")){
-                player2.limit = guessNumberPlayer1 + 5;
+                System.out.println("CERCA ENTRE EN EL IF");
+                player2.min = guessNumberPlayer1 - 5;
+                player2.max = guessNumberPlayer1 + 5;
+
             }else{
-                player2.limit = guessNumberPlayer1 + 10;
+                player2.min = guessNumberPlayer1 + 10;
+                player2.max = 100;
             }
 
+            // Le avisamos a la computadora las ultimas supociisiones del player
+            player2.guessesOtherPlayer = player1.getGuesses();
             //Le preguntamos el número a la computadora
             int guessNumberComputer = player2.makeGuess();
             System.out.println("La computadora eligio: " + guessNumberComputer);// Imprime en consola un mensaje y realiza un salto de línea
@@ -97,7 +103,7 @@ public class GuessTheNumberGame {
             boolean adivinoComputer = this.checkGuess(player2);
             if(adivinoComputer){
                 System.out.println("La computadora ha ganado, el número fue: : " + this.targetNumber + " . En el turno: " + (intentos) +" . Historial de suposiciones: " + Arrays.toString(player1.getGuesses()));
-                someoneWin = true;
+                break;
             }else{
                 System.out.println(this.checkNearOrFar(this.targetNumber, guessNumberComputer));
             }

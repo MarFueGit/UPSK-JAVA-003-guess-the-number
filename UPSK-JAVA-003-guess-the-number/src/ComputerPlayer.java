@@ -1,13 +1,26 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class ComputerPlayer extends Player{
     Random random;
-   public int limit = 50; // el atributo limit me sirve para ir cambiando el limite del número aleatorio
+    public int min = 1; // Valor mínimo del intervalo
+    public int max = 100; // Valor máximo del intervalo
+    private int intervalo = 0;
+    int[] guessesOtherPlayer; //En esta propiedad guardaremos las supociones del humano para no repetirlas
     @Override
     public int makeGuess() {
         // Generamos el número a adivinar de forma aleatoria
         this.random = new Random();
-        int player2Number = random.nextInt(this.limit);
+        this.intervalo= this.max - this.min + 1;
+        if(this.intervalo < 0){
+            this.intervalo = 1;
+        }
+        int player2Number = random.nextInt(this.intervalo) + this.min;
+        //Hay que validar que el numero que acaba de generar no exista ya en las supocisiones pasadas
+        // Mientras genere numeros que ya existan, no saldra del ciclo hasta generar uno diferente
+        while (Arrays.asList(this.getGuesses()).contains(player2Number) || Arrays.asList(this.guessesOtherPlayer).contains(player2Number)) {
+            player2Number = random.nextInt(this.intervalo) + this.min;
+        }
         // Crea un nuevo array con un tamaño aumentado en uno
         this.guesses = new int[0];
         int[] newGuesses = new int[this.guesses.length + 1];
